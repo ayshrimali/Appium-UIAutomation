@@ -45,7 +45,7 @@ class MobDriver(webdriver.Remote):
     def find(self, widget_type: UIComponents, name: str):
         """ 
         :param name: Name of the component
-        :param widget_type: Type of widget UIComponents
+        :param widget_type: Type of widget
         :return: returns labeled element of type 
         """
 
@@ -60,8 +60,8 @@ class MobDriver(webdriver.Remote):
     def find(self, widget_type: UIComponents, index: int):
         """
         :param index: Index of component to return from list
-        :param widget_type: Type of widget UIComponents
-        :return: returns labeled element of type
+        :param widget_type: Type of widget
+        :return: returns element of type at index
         """
 
         if self.platform == Platform.IOS:
