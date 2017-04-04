@@ -26,8 +26,24 @@ PATH = lambda p: os.path.abspath(
 )
 
 
-class MobDriver(webdriver.Remote):
+def collect_prerequisites():
+    print("1 - iOS")
+    print("2 - Android")
+    platform = int(input("Choose platform:"))
+    if 1 < platform > 2:
+        print('You have selected an invalid platform')
+        exit(1)
+    app_bundle = input("Enter path to app bundle:")
+    if app_bundle.__len__() == 0:
+        print('Can not test an app which does not exist ;)')
+        exit(1)
+    return {
+        "platform": platform,
+        "app_bundle": app_bundle
+    }
 
+
+class MobDriver(webdriver.Remote):
     def __init__(self, command_executor='http://127.0.0.1:4444/wd/hub',
                  desired_capabilities=None, browser_profile=None, proxy=None, keep_alive=False):
         super(MobDriver, self).__init__(command_executor, desired_capabilities, browser_profile, proxy,

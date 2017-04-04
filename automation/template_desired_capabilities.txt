@@ -1,5 +1,5 @@
 import os
-from automation.mobile.platforms import Platform
+
 # Returns abs path relative to this file and not cwd
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
@@ -9,23 +9,13 @@ PATH = lambda p: os.path.abspath(
 # refer at http://appium.io/slate/en/master/?ruby#the-default-capabilities-flag for more details
 
 
-def get_desired_capabilities(app_path=str, platform=Platform):
+def get_desired_capabilities(app_path=str, platform=int):
 
     if app_path == '<<Path to application bundle>>':
         print('Please set <<Path to application bundle>> in your test case')
         exit(1)
 
-    if platform == Platform.ANDROID:
-        desired_caps = {
-            'deviceName': 'emulator-5554',
-            'platformName': 'Android',
-            'platformVersion': '7.0',
-            'app': PATH('./' + app_path),
-            'automationName': 'uiautomator2',
-            'noReset': 'false',
-            'fullReset': 'false'
-        }
-    elif platform == Platform.IOS:
+    if platform == 1:
         desired_caps = {
             'deviceName': 'iPhone 5s',
             'platformName': 'iOS',
@@ -35,5 +25,16 @@ def get_desired_capabilities(app_path=str, platform=Platform):
             'noReset': 'false',
             'fullReset': 'false'
         }
+    elif platform == 2:
+        desired_caps = {
+            'deviceName': 'emulator-5554',
+            'platformName': 'Android',
+            'platformVersion': '7.0',
+            'app': PATH('./' + app_path),
+            'automationName': 'uiautomator2',
+            'noReset': 'false',
+            'fullReset': 'false'
+        }
+
 
     return desired_caps

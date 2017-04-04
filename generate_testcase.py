@@ -12,24 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-print("1 - Andriod")
-print("2 - iOS")
-platform = input("Choose platform:")
 testCaseSuiteName = input("Enter test case suite name:")
 filein = open('automation/template_testcase.txt')
 
-if int(platform) == 1: # its android
-    platform = 'Platform.ANDROID'
-elif int(platform) == 2: # its iOS
-    platform = 'Platform.IOS'
-else:
-    print('You have selected an invalid platform')
-    exit(1)
-
-
 if filein is not None:
     # write testcase.py
-    src = filein.read().format(testCaseSuiteName, platform)
+    src = filein.read().format(testCaseSuiteName)
     dstFile = open(testCaseSuiteName + ".py", "w")
     dstFile.write(src)
     dstFile.close()
