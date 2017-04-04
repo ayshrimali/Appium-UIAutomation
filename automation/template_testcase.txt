@@ -1,0 +1,32 @@
+import unittest
+
+from automation.mobile.mobdriver import MobDriver
+from automation.mobile.platforms import Platform
+from automation.mobile.uicomponents import UIComponents
+from desired_capabilities import get_desired_capabilities
+
+class {0}(unittest.TestCase):
+    @classmethod
+    def setUpClass(self):
+        desired_caps = get_desired_capabilities(app_path='<<Path to application bundle>>', platform={1})
+        self.driver = MobDriver('http://localhost:4723/wd/hub', desired_caps)
+
+    @classmethod
+    def tearDownClass(self):
+        self.driver.quit()
+
+    def test_firstTestCase(self):
+        el = self.driver.find(widget_type=UIComponents.LIST, index=4)
+        self.assertEqual(first=el.text, second="Content", msg="Title is not 'Content'")
+        el.click()
+
+    def test_secondTestCase(self):
+        el = self.driver.find(widget_type=UIComponents.LIST, index=2)
+        el.click()
+
+
+if __name__ == "__main__":
+    suite = unittest.TestLoader().loadTestsFromTestCase({0})
+    log_file = '{0}_report.txt'
+    f = open(log_file, "w")
+    unittest.TextTestRunner(stream=f, verbosity=2).run(suite)
