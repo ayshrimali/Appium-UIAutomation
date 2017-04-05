@@ -1,4 +1,5 @@
 from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='Appium-UIAutomation',
@@ -30,5 +31,5 @@ setup(
         'Topic :: Software Development :: Quality Assurance',
         'Topic :: Software Development :: Testing'
     ],
-    install_requires=['selenium>=2.47.0', 'Appium-Python-Client=0.24']
+    install_requires=['selenium>=2.47.0', 'Appium-Python-Client==0.24']
 )
