@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='Appium-UIAutomation',
-    version='0.0.1',
+    version='0.0.2',
     packages=['automation', 'automation.mobile'],
     url='https://github.com/ayshrimali/Appium-UIAutomation',
     license='Apache 2.0',
@@ -12,7 +12,7 @@ setup(
     description='A handy tool based on Appium-Python to write common UIAutomation test cases (for both iOS and Android) easily.',
     keywords=[
         'appium',
-        'appium 1.0',
+        'appium 1.6',
         'selenium',
         'selenium 3',
         'python client',
@@ -20,7 +20,7 @@ setup(
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
-        'Programming Language :: Python',
+        'Programming Language :: Python :: 3.4',
         'Environment :: Console',
         'Environment :: MacOS X',
         'Environment :: Win32 (MS Windows)',
@@ -31,5 +31,5 @@ setup(
         'Topic :: Software Development :: Quality Assurance',
         'Topic :: Software Development :: Testing'
     ],
-    install_requires=['selenium>=2.47.0', 'Appium-Python-Client==0.24']
+    install_requires=['setuptools', 'selenium>=2.47.0', 'Appium-Python-Client==0.24']
 )
