@@ -1,10 +1,10 @@
-from distutils.core import setup
 from setuptools import setup
 
 setup(
     name='Appium-UIAutomation',
-    version='0.0.2',
+    version='0.0.9',
     packages=['automation', 'automation.mobile'],
+    package_data={'': ['*.txt']},
     url='https://github.com/ayshrimali/Appium-UIAutomation',
     license='Apache 2.0',
     author='Anjum Shrimali',
@@ -31,5 +31,8 @@ setup(
         'Topic :: Software Development :: Quality Assurance',
         'Topic :: Software Development :: Testing'
     ],
-    install_requires=['setuptools', 'selenium>=2.47.0', 'Appium-Python-Client==0.24']
+    install_requires=['setuptools', 'selenium>=2.47.0', 'Appium-Python-Client>=0.24'],
+    scripts=['generate_testcase']
+
+
 )

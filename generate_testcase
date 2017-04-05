@@ -12,8 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import automation
+
+path = automation.__file__
+path = path[:path.rfind('/')]
 testCaseSuiteName = input("Enter test case suite name:")
-filein = open('automation/template_testcase.txt')
+filein = open(path + '/template_testcase.txt')
 
 if filein is not None:
     # write testcase.py
@@ -24,7 +28,7 @@ if filein is not None:
     filein.close()
 
     # write desired_caps.py
-    filein = open("automation/template_desired_capabilities.txt")
+    filein = open(path + "/template_desired_capabilities.txt")
     src = filein.read()
     dstFile = open("desired_capabilities.py", "w")
     dstFile.write(src)

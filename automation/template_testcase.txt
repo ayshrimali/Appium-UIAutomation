@@ -28,7 +28,7 @@ class {0}(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestingTestCase)
+    suite = unittest.TestLoader().loadTestsFromTestCase({0})
     log_file = '{0}_report.txt'
     f = open(log_file, "w")
     unittest.TextTestRunner(stream=f, verbosity=2).run(suite)
