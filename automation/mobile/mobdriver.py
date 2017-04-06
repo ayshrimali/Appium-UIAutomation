@@ -11,7 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from collections import namedtuple
 
+import time
 from appium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -27,6 +29,10 @@ PATH = lambda p: os.path.abspath(
 
 
 def collect_prerequisites():
+    """
+    Collects all prerequisites required to run the UIAutomation test case.
+    :return: 
+    """
     print("1 - iOS")
     print("2 - Android")
     platform = int(input("Choose platform:"))
@@ -58,28 +64,74 @@ class MobDriver(webdriver.Remote):
         else:
             self.platform = Platform.UNKNOWN
 
-    def find(self, widget_type: UIComponents, name: str):
+    def find_alert(self):
+        """
+        Finds alert and return it as named tuple 'Alert(alert=alrt, text=text, btns=btns)'
+        This is just a temporary workaround till Appium solves swith_to.alert issue.
+        :return: 
+        """
+        Alert = namedtuple('Alert', ['alert', 'text', 'btns'])
+        if self.platform == Platform.IOS:
+            lookup_xpath = UIComponents.ALERT.iOS
+            alrt = self.find_element_by_xpath(lookup_xpath)
+            text = alrt.find_element_by_xpath(UIComponents.LABEL.iOS.format('@*')).text
+            btns = alrt.find_elements_by_xpath(UIComponents.BUTTON.iOS.format('@*'))
+        elif self.platform == Platform.ANDROID:
+            lookup_xpath = UIComponents.ALERT.Android
+            alrt = self.find_element_by_xpath(lookup_xpath)
+            text = alrt.find_element_by_xpath(UIComponents.LABEL.Android.format('@*')).text
+            btns = alrt.find_elements_by_xpath(UIComponents.BUTTON.Android.format('@*'))
+
+        alert = Alert(alert=alrt, text=text, btns=btns)
+        return alert
+
+    def check_alert(self, msg=None, btn_index=0):
+        """
+        This method will check alert and compare the message
+        :param msg: If provided, will be compared with alert message. Will return false if msg does not match
+        :param btn_index:  If provided, will be clicked to dismissed alert.
+        :return: Will return named tuple 'Result'. Which as two params, 'result':bool and 'msg':str.
+        """
+        time.sleep(2)
+        Result = namedtuple('Result', ['result', 'msg'])
+        try:
+            alert = self.find_alert()
+            if alert is not None:
+                alert.btns[btn_index].click()
+                if msg is not None:
+                    success = (alert.text == msg)
+                    return Result(result=success, msg='Wrong alert msg')
+                else:
+                    alert.btns[btn_index].click()
+                    return Result(result=True, msg='No alert msg')
+            else:
+                return Result(result=False, msg='No alert found')
+        except:
+            return Result(result=False, msg='There is some error')
+
+    def find_by_name(self, widget_type, name):
         """ 
         :param name: Name of the component
         :param widget_type: Type of widget
         :return: returns labeled element of type 
         """
-
+        time.sleep(2)
         if self.platform == Platform.IOS:
-            lookup_xpath = widget_type.iOS.format("@hint='{0}' or @value={0} or @label={0} or @name={0}")
+            lookup_xpath = widget_type.iOS.format("@hint='{0}' or @value='{0}' or @label='{0}' or @name='{0}'")
         elif self.platform == Platform.ANDROID:
             lookup_xpath = widget_type.Android.format("@text='{0}'")
 
         lookup_xpath = lookup_xpath.format(name)
         return self.find_element_by_xpath(lookup_xpath)
 
-    def find(self, widget_type: UIComponents, index: int):
+    def find_by_index(self, widget_type, index):
         """
-        :param index: Index of component to return from list
+        :param index: Index of component to return from list of found elements
         :param widget_type: Type of widget
         :return: returns element of type at index
         """
 
+        time.sleep(2)
         if self.platform == Platform.IOS:
             lookup_xpath = widget_type.iOS
         elif self.platform == Platform.ANDROID:
