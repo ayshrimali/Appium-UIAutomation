@@ -1,0 +1,6 @@
+framework module Pods_Appium_UIAutomation {
+  umbrella header "Pods-Appium-UIAutomation-umbrella.h"
+
+  export *
+  module * { export * }
+}

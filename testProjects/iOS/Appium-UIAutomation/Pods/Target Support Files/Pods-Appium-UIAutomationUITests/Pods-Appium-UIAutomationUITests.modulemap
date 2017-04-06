@@ -1,0 +1,6 @@
+framework module Pods_Appium_UIAutomationUITests {
+  umbrella header "Pods-Appium-UIAutomationUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

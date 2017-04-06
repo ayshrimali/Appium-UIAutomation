@@ -88,4 +88,5 @@ ENV/
 # Rope project settings
 .ropeproject
 .idea
-testProjects
+testProjects/iOS/Appium-UIAutomation/Appium-UIAutomation.xcodeproj/xcuserdata
+testProjects/iOS/Appium-UIAutomation/Pods/Pods.xcodeproj/xcuserdata
