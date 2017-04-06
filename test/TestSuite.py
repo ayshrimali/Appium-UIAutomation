@@ -3,7 +3,7 @@ import unittest
 
 from automation.mobile.mobdriver import MobDriver, collect_prerequisites
 from automation.mobile.uicomponents import UIComponents
-from desired_capabilities import get_desired_capabilities
+from test.desired_capabilities import get_desired_capabilities
 
 # collect platform and app installation bundle details
 dict = collect_prerequisites()
