@@ -61,7 +61,7 @@ generate test suite file with your desired file name,
 
 ```shell
 generate_testcase
-Enter test case suite name:<<>Enter your suite file name here>
+Enter test case suite name:<<Enter your suite file name here>>
 ```
 
 This will generate two files in your current folder,
