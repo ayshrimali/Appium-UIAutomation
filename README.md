@@ -2,7 +2,7 @@
 A handy tool based on Appium & Python to write common UIAutomation test cases easily (for both iOS and Android).
 
 ## Installation
-####Install Python and setuptools
+#### Install Python and setuptools
 This tool requires Python 3.6 and setuptools. If you don't have that yet, download and install it from [here](https://www.python.org/downloads/).
 
 Once you have Python, you will need to install setuptools. Install it using command,
@@ -11,7 +11,7 @@ Once you have Python, you will need to install setuptools. Install it using comm
 pip install setuptools
 ```
 
-####Install GUI less Appium 1.6
+#### Install GUI less Appium 1.6
 You should also have Appium 1.6 installed in your machine, If you don't have that too, you can get some help to install in your machine from these steps,
 1. Download and install node js from [here](https://nodejs.org/en/download/). Make sure to use official installer to install node, which will take care of all required components. Else you may need to identify and install each missing component like npm.
 2. Download and install GUI less Appium 1.6 (beta) using this command,
@@ -19,7 +19,7 @@ You should also have Appium 1.6 installed in your machine, If you don't have tha
 npm install appium 1.6.1
 ```
 
-####Install Appium-UIAutomation lib
+#### Install Appium-UIAutomation lib
 There are three ways to install and use the Appium Python client.
 
 1. Install from [PyPi](https://pypi.python.org/pypi), as
