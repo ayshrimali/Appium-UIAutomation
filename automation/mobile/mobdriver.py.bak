@@ -35,11 +35,11 @@ def collect_prerequisites():
     """
     print("1 - iOS")
     print("2 - Android")
-    platform = int(eval(input("Choose platform:")))
+    platform = int(input("Choose platform:"))
     if 1 < platform > 2:
         print('You have selected an invalid platform')
         exit(1)
-    app_bundle = eval(input("Enter path to app bundle:"))
+    app_bundle = input("Enter path to app bundle:")
     if app_bundle.__len__() == 0:
         print('Can not test an app which does not exist ;)')
         exit(1)
