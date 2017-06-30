@@ -31,7 +31,7 @@ setup(
         'Topic :: Software Development :: Quality Assurance',
         'Topic :: Software Development :: Testing'
     ],
-    install_requires=['setuptools', 'selenium>=2.47.0', 'Appium-Python-Client>=0.24'],
+    install_requires=['setuptools', 'selenium==3.3.1', 'Appium-Python-Client>=0.24'],
     scripts=['generate_testcase']
 
 

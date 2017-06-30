@@ -85,9 +85,33 @@ class MobDriver(webdriver.Remote):
         alert = Alert(alert=alrt, text=text, btns=btns)
         return alert
 
-    def check_alert(self, msg=None, btn_index=0):
+    def find_permission_alert(self):
+        """
+        Finds alert and return it as named tuple 'Alert(alert=alrt, text=text, btns=btns)'
+        This is just a temporary workaround till Appium solves swith_to.alert issue.
+        :return: 
+        """
+        Alert = namedtuple('Alert', ['alert', 'text', 'btns'])
+        if self.platform == Platform.IOS:
+            lookup_xpath = UIComponents.PERMISSION_ALERT.iOS
+            alrt = self.find_element_by_xpath(lookup_xpath)
+            text = alrt.find_element_by_xpath(UIComponents.LABEL.iOS.format('@*')).text
+            btns = alrt.find_elements_by_xpath(UIComponents.BUTTON.iOS.format('@*'))
+        elif self.platform == Platform.ANDROID:
+            lookup_xpath = UIComponents.PERMISSION_ALERT.Android
+            alrt = self.find_element_by_xpath(lookup_xpath)
+            text = alrt.find_element_by_xpath(UIComponents.LABEL.Android.format('@*')).text
+            btns = alrt.find_elements_by_xpath(UIComponents.BUTTON.Android.format('@*'))
+
+        alert = Alert(alert=alrt, text=text, btns=btns)
+        return alert
+
+
+    def check_alert(self, msg=None, btn_index=0, alert_finder=find_alert):
         """
         This method will check alert and compare the message
+        :param alert_finder: closure that returns alert_finder either find_alert or find_permission_alert.
+        If not passed, it will consider find_alert as default one.
         :param msg: If provided, will be compared with alert message. Will return false if msg does not match
         :param btn_index:  If provided, will be clicked to dismissed alert.
         :return: Will return named tuple 'Result'. Which as two params, 'result':bool and 'msg':str.
@@ -95,7 +119,7 @@ class MobDriver(webdriver.Remote):
         time.sleep(2)
         Result = namedtuple('Result', ['result', 'msg'])
         try:
-            alert = self.find_alert()
+            alert = alert_finder()
             if alert is not None:
                 alert.btns[btn_index].click()
                 if msg is not None:

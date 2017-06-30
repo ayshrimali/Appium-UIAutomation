@@ -29,6 +29,8 @@ class UIComponents:
     SWITCH = Component(iOS='//XCUIElementTypeSwitch[{}]', Android='TBD')
     SLIDER = Component(iOS='//XCUIElementTypeSlider[{}]', Android='TBD')
     ALERT = Component(iOS='//XCUIElementTypeAlert', Android='(//android.widget.LinearLayout | //android.widget.FrameLayout)[contains(@resource-id, \'id/parentPanel\')]')
+    PERMISSION_ALERT = Component(iOS='//XCUIElementTypeAlert',
+                      Android='(//android.widget.LinearLayout)[contains(@resource-id, \'id/dialog_container\')]')
     # For app compat v7 alert dialog
     # //android.widget.FrameLayout[contains(@resource-id, 'id/action_bar_root')]
     # For native alert dialog
